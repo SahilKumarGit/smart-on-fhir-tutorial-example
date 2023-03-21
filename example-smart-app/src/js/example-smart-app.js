@@ -1,5 +1,5 @@
-(function(window){
-  window.extractData = function() {
+(function (window) {
+  window.extractData = function () {
     var ret = $.Deferred();
 
     function onError() {
@@ -7,21 +7,24 @@
       ret.reject();
     }
 
-    function onReady(smart)  {
+    function onReady(smart) {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
 
-         var obv = smart.patient.api.fetchAll({
-           type: 'Observation',
-           query: {
-             code: {
-               $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
-                     'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
-                     'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
-             }
-           }
-         });
+        var obv = smart.patient.api.fetchAll({
+          type: 'Observation',
+          query: {
+            code: {
+              $or: ['http://loinc.org|8310-5',
+                'http://loinc.org|8302-2',
+                'http://loinc.org|3141-9',
+                'http://loinc.org|8867-4',
+                'http://loinc.org|55284-4',
+                'http://loinc.org|2710-2']
+            }
+          }
+        });
 
         // Previous UW values for lymph
         //var obv = smart.patient.api.fetchAll({
@@ -38,7 +41,7 @@
 
         $.when(pt, obv).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv).done(function (patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
           console.log("byCodes:");
           console.log(byCodes('8480-6'));
@@ -57,11 +60,11 @@
           // Observations
           // lymph = byCodes('26478-8');
           // Cerner SoF Tutorial Observations
-           var height = byCodes('8302-2');
-           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
-           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
-           var hdl = byCodes('2085-9');
-           var ldl = byCodes('2089-1');
+          var height = byCodes('8302-2');
+          var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
+          var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
+          var hdl = byCodes('2085-9');
+          var ldl = byCodes('2089-1');
 
 
           var p = defaultPatient();
@@ -77,7 +80,7 @@
           // Cerner SoF Tutorial Observations
           p.height = getQuantityValueAndUnit(height[0]);
 
-          if (typeof systolicbp != 'undefined')  {
+          if (typeof systolicbp != 'undefined') {
             p.systolicbp = systolicbp;
           }
 
@@ -101,20 +104,20 @@
 
   };
 
-  function defaultPatient(){
+  function defaultPatient() {
     return {
-      fname: {value: ''},
-      lname: {value: ''},
-      gender: {value: ''},
-      birthdate: {value: ''},
+      fname: { value: '' },
+      lname: { value: '' },
+      gender: { value: '' },
+      birthdate: { value: '' },
       // lymph: {value: ''}
 
       // Cerner SoF Tutorial Observations
-      height: {value: ''},
-      systolicbp: {value: ''},
-      diastolicbp: {value: ''},
-      ldl: {value: ''},
-      hdl: {value: ''},
+      height: { value: '' },
+      systolicbp: { value: '' },
+      diastolicbp: { value: '' },
+      ldl: { value: '' },
+      hdl: { value: '' },
     };
   }
 
@@ -122,9 +125,9 @@
 
   function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
-    BPObservations.forEach(function(observation){
-      var BP = observation.component.find(function(component){
-        return component.code.coding.find(function(coding) {
+    BPObservations.forEach(function (observation) {
+      var BP = observation.component.find(function (component) {
+        return component.code.coding.find(function (coding) {
           return coding.code == typeOfPressure;
         });
       });
@@ -139,16 +142,16 @@
 
   function getQuantityValueAndUnit(ob) {
     if (typeof ob != 'undefined' &&
-        typeof ob.valueQuantity != 'undefined' &&
-        typeof ob.valueQuantity.value != 'undefined' &&
-        typeof ob.valueQuantity.unit != 'undefined') {
-          return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
+      typeof ob.valueQuantity != 'undefined' &&
+      typeof ob.valueQuantity.value != 'undefined' &&
+      typeof ob.valueQuantity.unit != 'undefined') {
+      return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
     } else {
       return undefined;
     }
   }
 
-  window.drawVisualization = function(p) {
+  window.drawVisualization = function (p) {
     $('#holder').show();
     $('#loading').hide();
     $('#fname').html(p.fname);
@@ -156,7 +159,7 @@
     $('#gender').html(p.gender);
     $('#birthdate').html(p.birthdate);
     //$('#lymph').html(p.lymph);
-    
+
     // Cerner SoF Tutorial Observations
 
     $('#height').html(p.height);
