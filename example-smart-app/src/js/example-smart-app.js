@@ -21,6 +21,10 @@
                 'http://loinc.org|3141-9',
                 'http://loinc.org|8867-4',
                 'http://loinc.org|55284-4',
+                'http://loinc.org|8302-2',
+                'http://loinc.org|3141-9',
+                'http://loinc.org|8867-4',
+                'http://loinc.org|55284-4',
                 'http://loinc.org|2710-2']
             }
           }
