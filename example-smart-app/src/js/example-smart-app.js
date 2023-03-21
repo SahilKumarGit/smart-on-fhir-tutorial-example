@@ -48,6 +48,8 @@
           console.log(byCodes('8480-6'));
           console.log(byCodes('8462-4'));
 
+          console.log({ patient, obv })
+
           var gender = patient.gender;
 
           var fname = '';
