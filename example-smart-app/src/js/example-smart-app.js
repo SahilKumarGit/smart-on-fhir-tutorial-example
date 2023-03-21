@@ -1,4 +1,3 @@
-console.log('--------------------------------')
 (function (window) {
   window.extractData = function () {
     var ret = $.Deferred();
@@ -37,7 +36,7 @@ console.log('--------------------------------')
         //    }
         //  }
         //});
-
+        console.log('--------------------------------')
         console.log('patient:');
         console.log(patient)
 
