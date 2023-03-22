@@ -42,25 +42,25 @@
 
   };
 
-  window.drawVisualization = function ({ _patient, _obv }) {
-    console.log({ _patient, _obv })
-    const { patent, obv } = validate(_patient, _obv) || { patent: _patient, obv: _obv }
+  window.drawVisualization = function ({ patient, obv }) {
+    const { patient, obv } = { patient: patient, obv: obv }
+    console.log({ patient, obv })
     $('#holder').show();
     $('#loading').hide();
-    $('#patentsDetails').html(`
+    $('#patientsDetails').html(`
       <div class="card">
         <div class="card-header">
-          Patents Details: <b>${patent?.name[0]?.given.join(' ')} ${patent?.name[0]?.family} </b>
-          ${patent?.active ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>'}</div>
+          patients Details: <b>${patient?.name[0]?.given.join(' ')} ${patient?.name[0]?.family} </b>
+          ${patient?.active ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>'}</div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
-            <div>Birth Date: <b>${patent?.birthDate}</b></div>
-            <div>Gender: <b>${patent?.gender}</b></div>
-            <div>Patents ID: <b>${patent?.id}</b></div>
+            <div>Birth Date: <b>${patient?.birthDate}</b></div>
+            <div>Gender: <b>${patient?.gender}</b></div>
+            <div>patients ID: <b>${patient?.id}</b></div>
             <br/>
             <h5>Contact Info:</h5>
-            ${patent?.telecom?.map(each => `<div> ${each?.system}: ${each?.value}</div>`)}            
-            <footer class="blockquote-footer">Last Update: <cite title="Source Title">${new Date(patent?.meta?.lastUpdated).getUTCDate()}</cite></footer>
+            ${patient?.telecom?.map(each => `<div> ${each?.system}: ${each?.value}</div>`)}            
+            <footer class="blockquote-footer">Last Update: <cite title="Source Title">${new Date(patient?.meta?.lastUpdated).getUTCDate()}</cite></footer>
           </blockquote>
         </div>
       </div>      
