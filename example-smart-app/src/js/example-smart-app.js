@@ -17,8 +17,8 @@
           query: {
             code: {
               $or: [
-                "http://loinc.org|8310-5",
-                "http://loinc.org|8302-2",
+                'http://loinc.org|8310-5',
+                'http://loinc.org|8302-2',
               ]
             }
           }
@@ -44,8 +44,10 @@
 
   window.drawVisualization = function ({ patient, obv }) {
     console.log({ patient, obv })
-    // $('#holder').show();
-    // $('#loading').hide();
+    const validPatient = getName(patient, '')
+    $('#holder').show();
+    $('#loading').hide();
+    $('#patentsDetailsName').html(`Patents Details: ${validPatient.patent.identifier[0].type.text}`);
     // $('#fname').html(p.fname);
     // $('#lname').html(p.lname);
     // $('#gender').html(p.gender);
@@ -62,3 +64,4 @@
   };
 
 })(window);
+
