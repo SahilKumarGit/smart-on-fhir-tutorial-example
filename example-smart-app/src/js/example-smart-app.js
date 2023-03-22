@@ -44,14 +44,14 @@
 
   window.drawVisualization = function ({ _patient, _obv }) {
     console.log({ _patient, _obv })
-    const { patent, obv } = validate(_patient, _obv) || { patent: _patent, obv: _obv }
+    const { patent, obv } = validate(_patient, _obv) || { patent: _patient, obv: _obv }
     $('#holder').show();
     $('#loading').hide();
     $('#patentsDetails').html(`
       <div class="card">
         <div class="card-header">
           Patents Details: <b>${patent?.name[0]?.given.join(' ')} ${patent?.name[0]?.family} </b>
-          ${patent.active ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>'}</div>
+          ${patent?.active ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>'}</div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
             <div>Birth Date: <b>${patent?.birthDate}</b></div>
