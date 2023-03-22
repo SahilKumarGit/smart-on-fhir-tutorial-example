@@ -44,7 +44,7 @@
 
   window.drawVisualization = function ({ _patient, _obv }) {
     console.log({ _patient, _obv })
-    const { patent, obv } = getName(_patient, _obv)
+    const { patent, obv } = validate(_patient, _obv) || { patent: _patent, obv: _obv }
     $('#holder').show();
     $('#loading').hide();
     $('#patentsDetails').html(`

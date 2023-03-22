@@ -99,7 +99,7 @@
 *     }
 * }[]} obv 
 */
-function getName(patent, obv) {
+function validate(patent, obv) {
     return {
         patent, obv
     }
