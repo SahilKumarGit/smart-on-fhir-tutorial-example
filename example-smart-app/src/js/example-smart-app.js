@@ -42,25 +42,30 @@
 
   };
 
-  window.drawVisualization = function ({ patient, obv }) {
-    console.log({ patient, obv })
-    const validPatient = getName(patient, '')
+  window.drawVisualization = function ({ _patient, _obv }) {
+    console.log({ _patient, _obv })
+    const { patent, obv } = getName(_patient, _obv)
     $('#holder').show();
     $('#loading').hide();
-    $('#patentsDetailsName').html(`Patents Details: ${validPatient.patent.identifier[0].type.text}`);
+    $('#patentsDetails').html(`
+      <div class="card">
+        <div class="card-header">
+          Patents Details: <b>${patent.name[0].given.join(' ')} ${patent.name[0].family} </b>
+          ${patent.active ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>'}</div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <div>Birth Date: <b>${patent.birthDate}</b></div>
+            <div>Gender: <b>${patent.gender}</b></div>
+            <div>Patents ID: <b>${patent.id}</b></div>
+            <br/>
+            <h5>Contact Info:</h5>
+            ${patent.telecom.map(each => `<div> ${each.system}: ${each.value}</div>`)}            
+            <footer class="blockquote-footer">Last Update: <cite title="Source Title">${new Date(patent.meta.lastUpdated).getUTCDate()}</cite></footer>
+          </blockquote>
+        </div>
+      </div>      
+    `);
     // $('#fname').html(p.fname);
-    // $('#lname').html(p.lname);
-    // $('#gender').html(p.gender);
-    // $('#birthdate').html(p.birthdate);
-    //$('#lymph').html(p.lymph);
-
-    // Cerner SoF Tutorial Observations
-
-    // $('#height').html(p.height);
-    // $('#systolicbp').html(p.systolicbp);
-    // $('#diastolicbp').html(p.diastolicbp);
-    // $('#ldl').html(p.ldl);
-    // $('#hdl').html(p.hdl);
   };
 
 })(window);

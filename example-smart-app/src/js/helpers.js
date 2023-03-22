@@ -50,10 +50,57 @@
 *        reference: string
 *    }[]
 * }} patent 
-* @param {string} type 
+* @param {{
+*     "resourceType": string,
+*     "id": string,
+*     "meta": {
+*         "versionId": string,
+*         "lastUpdated": string,
+*         "source": string
+*     },
+*     "text": {
+*         "status": string,
+*         "div": string
+*     },
+*     "identifier": {
+*         "use": string,
+*         "system": string,
+*         "value": string
+*     }[],
+*     "status": string,
+*     "category": {
+*         "coding": {
+*             "system": string,
+*             "code": string,
+*             "display": string
+*         }[],
+*         "text": string
+*     }[],
+*     "code": {
+*         "coding": {
+*             "system": string,
+*             "code": string,
+*             "display": string
+*         }[],
+*         "text": string
+*     },
+*     "subject": {
+*         "reference": string
+*     },
+*     "effectiveDateTime": string,
+*     "performer": {
+*         "reference": string
+*     }[],
+*     "valueQuantity": {
+*         "value": number,
+*         "unit": string,
+*         "system": string,
+*         "code": string
+*     }
+* }[]} obv 
 */
-function getName(patent, type) {
+function getName(patent, obv) {
     return {
-        patent, type
+        patent, obv
     }
 }
