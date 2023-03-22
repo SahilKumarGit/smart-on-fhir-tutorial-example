@@ -43,7 +43,7 @@
   };
 
   window.drawVisualization = function ({ patient, obv }) {
-    // const { patient, obv } = validate(patient, obv)
+    // var { patient, obv } = validate(patient, obv)
     console.log({ patient, obv })
     $('#holder').show();
     $('#loading').hide();
@@ -69,7 +69,18 @@
         </div>
       </div>      
     `);
-    // $('#fname').html(p.fname);
+    $('#Observation').html(`
+      ${obv.map(each => `
+        <tr>
+          <td>${each?.id}</td>
+          <td>${each?.code?.text}</td>
+          <td>${each?.resourceType}</td>
+          <td>${each?.valueQuantity?.value} ${each?.valueQuantity?.unit}</td>
+          <td>${new Date(each?.meta?.lastUpdated).toDateString()}</td>
+        </tr>
+      `)}
+      
+    `);
   };
 
 })(window);
