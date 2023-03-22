@@ -32,93 +32,31 @@ async function getData() {
 
 async function dateChange() {
     console.log('shart-app-promise')
-    FHIR.oauth2.ready((smart) => {
-        if (smart.hasOwnProperty('patient')) {
-            const updatedPatient = {
-                resourceType: 'Patient',
-                id: 'smart-1288992',
-                text: {
-                    status: "generated",
-                    div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">Daniel Adams</div>"
-                },
-                identifier: [
-                    {
-                        use: "official",
-                        type: {
-                            coding: [
-                                {
-                                    system: "http://terminology.hl7.org/CodeSystem/v2-0203",
-                                    code: "MR",
-                                    display: "Medical Record Number"
-                                }
-                            ],
-                            text: "Medical Record Number"
-                        },
-                        system: "http://hospital.smarthealthit.org",
-                        value: "smart-1288992"
-                    }
-                ],
-                active: true,
-                name: [
-                    {
-                        use: "official",
-                        family: "Adams",
-                        given: [
-                            "Daniel",
-                            "X"
-                        ]
-                    }
-                ],
-                telecom: [
+    new Promise((resolve, reject) => {
+        FHIR.oauth2.ready(async (smart) => {
+            if (smart.hasOwnProperty('patient')) {
+                const patent = await smart.patient.read()
+
+                patent.telecom = [
                     {
                         system: "email",
                         value: "daniel.adams@example.com"
                     },
                     {
                         system: "email",
-                        value: "daniel2.adams@example.com"
+                        value: "daniel2.eee@example.com"
                     }
-                ],
-                gender: "male",
-                birthDate: "1925-12-23",
-                address: [
-                    {
-                        use: "home",
-                        line: [
-                            "1 Hill Ave"
-                        ],
-                        city: "Tulsa",
-                        state: "OK",
-                        postalCode: "74117",
-                        country: "USA"
-                    }
-                ],
-                generalPractitioner: [
-                    {
-                        reference: "Practitioner/smart-Practitioner-71614502"
-                    }
-                ]
-            };
-
-            smart.patient.update(updatedPatient).then(resolve).catch(error => reject(error.message));
-        } else {
-            reject(`smart.hasOwnProperty('patient') return undefiend.`)
-        }
-    }, (error) => {
-        reject(error.message)
-    });
-    return await FHIR.oauth2.ready(client => {
-
-        const patientId = 'smart-1288992'; // replace with the actual patient ID
-
-        return client.update({
-            resourceType: 'Patient',
-            id: patientId,
-            body: updatedPatient
+                ];
+                const update = await smart.patient.update(patent);
+                resolve(update)
+            } else {
+                reject(`smart.hasOwnProperty('patient') return undefiend.`)
+            }
+        }, (error) => {
+            reject(error.message)
         });
-    }, (error) => {
-        console.log('error: ', error)
     })
+
 }
 window.getData = getData;
 window.dateChange = dateChange;
