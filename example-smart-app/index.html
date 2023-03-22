@@ -1,90 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Maggie-SMART-App-2023</title>
-
-    <link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./src/css/example-smart-app.css"
+    />
   </head>
   <body>
-    <div id='errors'>
-    </div>
+    <div id="errors"></div>
     <div id="loading" class="spinner">
       <div class="bounce1"></div>
       <div class="bounce2"></div>
       <div class="bounce3"></div>
     </div>
-    <div id='holder' >
+    <div id="holder">
       <h2>Example-SMART-App</h2>
 
       <h2>Patient Resource</h2>
       <table>
         <tr>
           <th>First Name:</th>
-          <td id='fname'></td>
+          <td id="fname"></td>
         </tr>
         <tr>
           <th>Last Name:</th>
-          <td id='lname'></td>
+          <td id="lname"></td>
         </tr>
         <tr>
           <th>Gender:</th>
-          <td id='gender'></td>
+          <td id="gender"></td>
         </tr>
         <tr>
           <th>Date of Birth:</th>
-          <td id='birthdate'></td>
+          <td id="birthdate"></td>
         </tr>
       </table>
       <h2>Observation Resource</h2>
-      <table>
+      <table class="table table-bordered">
         <!-- <tr>
           <th>Lymph:</th>
           <td id='lymph'></td>
         </tr> -->
         <tr>
           <th>Height:</th>
-          <td id='height'></td>
+          <td id="height"></td>
         </tr>
         <tr>
           <th>Systolic Blood Pressure:</th>
-          <td id='systolicbp'></td>
-
+          <td id="systolicbp"></td>
         </tr>
         <tr>
           <th>Diastolic Blood Pressure:</th>
-          <td id='diastolicbp'></td>
+          <td id="diastolicbp"></td>
         </tr>
         <tr>
           <th>LDL:</th>
-          <td id='ldl'></td>
+          <td id="ldl"></td>
         </tr>
         <tr>
           <th>HDL:</th>
-          <td id='hdl'></td>
+          <td id="hdl"></td>
         </tr>
       </table>
+
+      <!-- <h2>Observation Resource</h2>
+      <table>
+ 
+        <tr>
+          <th>Height:</th>
+          <td id="height"></td>
+        </tr>
+        <tr>
+          <th>Systolic Blood Pressure:</th>
+          <td id="systolicbp"></td>
+        </tr>
+        <tr>
+          <th>Diastolic Blood Pressure:</th>
+          <td id="diastolicbp"></td>
+        </tr>
+        <tr>
+          <th>LDL:</th>
+          <td id="ldl"></td>
+        </tr>
+        <tr>
+          <th>HDL:</th>
+          <td id="hdl"></td>
+        </tr>
+      </table> -->
     </div>
 
     <!-- Application-level javascript-->
-    <script src='./src/js/example-smart-app.js?v=0.3'></script>
+    <script src="./src/js/example-smart-app.js?v=0.4"></script>
 
     <!-- FHIR Client JS Library -->
-    <script src='./lib/js/fhir-client-v0.1.12.js'></script>
+    <script src="./lib/js/fhir-client-v0.1.12.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
       extractData().then(
         //Display Patient Demographics and Observations if extractData was success
-        function(p) {
+        function (p) {
           drawVisualization(p);
         },
 
         //Display 'Failed to call FHIR Service' if extractData failed
-        function() {
-          $('#loading').hide();
-          $('#errors').html('<p> Failed to call FHIR Service </p>');
+        function () {
+          $("#loading").hide();
+          $("#errors").html("<p> Failed to call FHIR Service </p>");
         }
       );
     </script>
