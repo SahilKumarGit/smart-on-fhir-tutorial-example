@@ -43,7 +43,6 @@
   };
 
   window.drawVisualization = function ({ patient, obv }) {
-    const { patient, obv } = { patient: patient, obv: obv }
     console.log({ patient, obv })
     $('#holder').show();
     $('#loading').hide();
