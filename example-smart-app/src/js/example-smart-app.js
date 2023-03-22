@@ -73,8 +73,8 @@
       ${obv.map(each => `
         <tr>
           <td>${each?.id}</td>
-          <td>${each?.code?.text}</td>
           <td>${each?.resourceType}</td>
+          <td>${each?.code?.text}</td>
           <td>${each?.valueQuantity?.value} ${each?.valueQuantity?.unit}</td>
           <td>${new Date(each?.meta?.lastUpdated).toDateString()}</td>
         </tr>
