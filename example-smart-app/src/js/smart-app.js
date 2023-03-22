@@ -1,4 +1,4 @@
-async function getData() {
+window.getData = async () => {
     return new Promise((resolve, reject) => {
         console.log('shart-app-promise')
         FHIR.oauth2.ready((smart) => {
@@ -31,4 +31,3 @@ async function getData() {
 }
 
 console.log('shart-app')
-getData().then(console.log).catch(console.log)

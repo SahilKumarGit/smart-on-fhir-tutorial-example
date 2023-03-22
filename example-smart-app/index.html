@@ -59,6 +59,9 @@
         $("#errors").html("<p> Failed to call FHIR Service </p>");
       }
     );
+
+
+    getData().then(console.log).catch(console.log)
   </script>
 </body>
 
