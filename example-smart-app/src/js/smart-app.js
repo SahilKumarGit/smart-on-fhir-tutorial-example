@@ -6,7 +6,7 @@ async function getData() {
                 var patient = smart.patient;
                 var pt = patient.read();
 
-                smart.patient.api.fetchAll({
+                var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
                         code: {
@@ -16,8 +16,8 @@ async function getData() {
                             ]
                         }
                     }
-                })
-                    .then(response => resolve({ patient, obv: response }))
+                });
+                Promise.all([pt, obv]).then(([patient, obv]) => resolve({ patient, obv }))
                     .catch(error => reject(error.message));
                 // ----------------
             } else {
