@@ -64,8 +64,8 @@
     window.getData().then(
       //Display Patient Demographics and Observations if extractData was success
       function(p) {
-        console.log("call p")
-        drawVisualization(p);
+        console.log("call p", p)
+        // drawVisualization(p);
       },
 
       //Display 'Failed to call FHIR Service' if extractData failed
