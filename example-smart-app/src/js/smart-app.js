@@ -31,7 +31,7 @@ async function getData() {
 }
 
 async function dateChange() {
-    return await FHIR.oauth2.ready().then(client => {
+    return await FHIR.oauth2.ready(client => {
         const patientId = 'smart-1288992'; // replace with the actual patient ID
         const updatedPatient = {
             resourceType: 'Patient',
@@ -103,9 +103,9 @@ async function dateChange() {
             id: patientId,
             body: updatedPatient
         });
-    }).then(response => {
-        // handle the response here
-    }).catch(console.error);
+    }, (error) => {
+        console.log('error: ', error)
+    })
 }
 window.getData = getData;
 window.dateChange = dateChange;
