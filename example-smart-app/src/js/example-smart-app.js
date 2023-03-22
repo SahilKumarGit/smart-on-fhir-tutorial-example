@@ -43,6 +43,7 @@
   };
 
   window.drawVisualization = function ({ patient, obv }) {
+    // const { patient, obv } = validate(patient, obv)
     console.log({ patient, obv })
     $('#holder').show();
     $('#loading').hide();
@@ -57,9 +58,13 @@
             <div>Gender: <b>${patient?.gender}</b></div>
             <div>patients ID: <b>${patient?.id}</b></div>
             <br/>
-            <h5>Contact Info:</h5>
-            ${patient?.telecom?.map(each => `<div> ${each?.system}: ${each?.value}</div>`)}            
-            <footer class="blockquote-footer">Last Update: <cite title="Source Title">${new Date(patient?.meta?.lastUpdated).getUTCDate()}</cite></footer>
+            <div class="card">
+              <div class="card-body">
+                <h6>Contact Info:</h6>
+                ${patient?.telecom?.map(each => `<div> ${each?.system}: ${each?.value}</div>`)}            
+              </div>
+            </div>
+            <footer class="blockquote-footer">Last Update: <cite title="Source Title">${new Date(patient?.meta?.lastUpdated).toDateString()}</cite></footer>
           </blockquote>
         </div>
       </div>      
